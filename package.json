@@ -1,0 +1,42 @@
+{
+  "name": "202201-w2ch5-amalia-escolano",
+  "version": "1.0.0",
+  "description": "202201-W2CH5-amalia-escolano",
+  "main": "index.js",
+  "types": "module",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint",
+    "test:watch": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aescolanoc/202201-W2CH5-amalia-escolano.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aescolanoc/202201-W2CH5-amalia-escolano/issues"
+  },
+  "homepage": "https://github.com/Aescolanoc/202201-W2CH5-amalia-escolano#readme",
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.16.8",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "husky": "^7.0.4",
+    "jest": "^27.4.7"
+  },
+  "babel": {
+    "env": {
+      "test": {
+        "plugins": [
+          "@babel/plugin-transform-modules-commonjs"
+        ]
+      }
+    }
+  }
+}

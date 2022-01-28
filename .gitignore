@@ -1,3 +1,8 @@
+#
+.DS_Store
+.scannerwork/
+sonar-project.properties
+
 # Logs
 logs
 *.log
