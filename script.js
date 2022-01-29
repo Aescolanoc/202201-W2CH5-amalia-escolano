@@ -1,8 +1,8 @@
 const grid = [
+  [1, 0, 0, 0, 0],
+  [1, 1, 0, 0, 0],
   [0, 0, 0, 0, 0],
-  [0, 0, 1, 0, 0],
-  [0, 0, 1, 0, 0],
-  [0, 0, 1, 0, 0],
+  [0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0],
 ];
 
@@ -75,15 +75,18 @@ function newBorn(ejeX, ejeY) {
   let arrayCellsToBorn = [];
   for (let i = ejeX - 1; i <= ejeX + 1; i++) {
     for (let j = ejeY - 1; j <= ejeY + 1; j++) {
-      if (grid[i][j] === 0) {
-        x = i;
-        y = j;
-        newBornFriends = searchCellsAliveArround(i, j);
-        if (newBornFriends === 3) {
-          //almacenar para que nazca luego
-          cellToBorn.push(i, j);
-          arrayCellsToBorn.push(cellToBorn);
-          cellToBorn = [];
+      if ((i >= 0 && j >= 0) || (i < grid.legth && j < grid.legth)) {
+        //para que no sobrepase el grid
+        if (grid[i][j] === 0) {
+          x = i;
+          y = j;
+          newBornFriends = searchCellsAliveArround(i, j);
+          if (newBornFriends === 3) {
+            //almacenar para que nazca luego
+            cellToBorn.push(i, j);
+            arrayCellsToBorn.push(cellToBorn);
+            cellToBorn = [];
+          }
         }
       }
     }
