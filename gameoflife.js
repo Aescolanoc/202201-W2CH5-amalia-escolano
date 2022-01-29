@@ -1,8 +1,8 @@
 const grid = [
-  [1, 0, 0, 0, 0],
-  [1, 1, 0, 0, 0],
   [0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0],
+  [0, 0, 1, 0, 0],
+  [0, 0, 1, 0, 0],
+  [0, 0, 1, 0, 0],
   [0, 0, 0, 0, 0],
 ];
 
@@ -30,8 +30,8 @@ function gameOfLife(mainarray, lifearray) {
   let arrayBorn = [];
   let death = false;
   for (let k = 0; k < lifearray.length; k++) {
-    x = lifearray[k][0];
-    y = lifearray[k][1];
+    let x = lifearray[k][0];
+    let y = lifearray[k][1];
     //SOY LA CELULA Y PREGUNTO SI HAY VECINOS ALREDEDOR
     cellsAliveAround = searchCellsAliveArround(x, y) - 1;
     //Ya he contado los vecinos y ahora vamos a ver si muero o vivo
@@ -57,11 +57,11 @@ function gameOfLife(mainarray, lifearray) {
 whoIsLive(grid);
 console.log(grid);
 
-function searchCellsAliveArround(ejeX, ejeY) {
+export function searchCellsAliveArround(ejeX, ejeY) {
   let friends = 0;
-  for (i = ejeX - 1; i <= ejeX + 1; i++) {
-    for (j = ejeY - 1; j <= ejeY + 1; j++) {
-      if (i >= 0 && j >= 0) {
+  for (let i = ejeX - 1; i <= ejeX + 1; i++) {
+    for (let j = ejeY - 1; j <= ejeY + 1; j++) {
+      if ((i >= 0 && j >= 0) || (i < grid.legth && j < grid.length)) {
         if (grid[i][j] === 1) friends++;
       }
     }
@@ -78,9 +78,9 @@ function newBorn(ejeX, ejeY) {
       if ((i >= 0 && j >= 0) || (i < grid.legth && j < grid.legth)) {
         //para que no sobrepase el grid
         if (grid[i][j] === 0) {
-          x = i;
-          y = j;
-          newBornFriends = searchCellsAliveArround(i, j);
+          let x = i;
+          let y = j;
+          newBornFriends = searchCellsAliveArround(x, y);
           if (newBornFriends === 3) {
             //almacenar para que nazca luego
             cellToBorn.push(i, j);
