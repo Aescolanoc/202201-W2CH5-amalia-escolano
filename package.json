@@ -4,10 +4,12 @@
   "description": "202201-W2CH5-amalia-escolano",
   "main": "index.js",
   "types": "module",
+  "type": "module",
   "scripts": {
     "test": "jest",
     "lint": "eslint",
-    "test:watch": "jest --watchAll"
+    "test:watch": "jest --watchAll",
+    "test:coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",

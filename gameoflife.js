@@ -6,43 +6,35 @@ const grid = [
   [0, 0, 0, 0, 0],
 ];
 
-function whoIsLive(array) {
+export function whoIsLive(array) {
   const arrayLife = [];
   let arrayCellsLive = [];
-  //Voy a recorrer el array principal para ver quien está vivo
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array[i].length; j++) {
       if (array[i][j] === 1) {
-        //guardo las coordenadas de las posiciones vivas
         arrayCellsLive.push(i, j);
         arrayLife.push(arrayCellsLive);
         arrayCellsLive = [];
       }
     }
   }
-  gameOfLife(grid, arrayLife);
+  gameOfLife(arrayLife);
+  return arrayLife;
 }
 
-function gameOfLife(mainarray, lifearray) {
+export function gameOfLife(lifeArray) {
   let cellsAliveAround = -1;
   let arrayCellsDead = [];
   const arrayDeath = [];
   let arrayBorn = [];
   let death = false;
-  for (let k = 0; k < lifearray.length; k++) {
-    let x = lifearray[k][0];
-    let y = lifearray[k][1];
-    //SOY LA CELULA Y PREGUNTO SI HAY VECINOS ALREDEDOR
+  for (let k = 0; k < lifeArray.length; k++) {
+    let x = lifeArray[k][0];
+    let y = lifeArray[k][1];
     cellsAliveAround = searchCellsAliveArround(x, y) - 1;
-    //Ya he contado los vecinos y ahora vamos a ver si muero o vivo
-
     if (cellsAliveAround === 2 || cellsAliveAround === 3) {
-      //YO COMO CELULA VIVO
-      //Pero recorro las celulas muertas de alrededor para ver si nacen
-      console.log(x + "-" + y + " vive");
       arrayBorn = newBorn(x, y);
     } else if (cellsAliveAround < 2 || cellsAliveAround > 3) {
-      //YO COMO CELULA MUERO PERO AUN NO PORQUE VOY A VER SI ME REPRODUZCO ANTES DE MORIR
       arrayCellsDead.push(x, y);
       arrayDeath.push(arrayCellsDead);
       arrayCellsDead = [];
@@ -52,10 +44,6 @@ function gameOfLife(mainarray, lifearray) {
   cellsMustDie(arrayDeath);
   cellsMustBorn(arrayBorn);
 }
-
-// gameOfLife(grid);
-whoIsLive(grid);
-console.log(grid);
 
 export function searchCellsAliveArround(ejeX, ejeY) {
   let friends = 0;
@@ -69,20 +57,18 @@ export function searchCellsAliveArround(ejeX, ejeY) {
   return friends;
 }
 
-function newBorn(ejeX, ejeY) {
+export function newBorn(ejeX, ejeY) {
   let newBornFriends = 0;
   let cellToBorn = [];
   let arrayCellsToBorn = [];
   for (let i = ejeX - 1; i <= ejeX + 1; i++) {
     for (let j = ejeY - 1; j <= ejeY + 1; j++) {
       if ((i >= 0 && j >= 0) || (i < grid.legth && j < grid.legth)) {
-        //para que no sobrepase el grid
         if (grid[i][j] === 0) {
           let x = i;
           let y = j;
           newBornFriends = searchCellsAliveArround(x, y);
           if (newBornFriends === 3) {
-            //almacenar para que nazca luego
             cellToBorn.push(i, j);
             arrayCellsToBorn.push(cellToBorn);
             cellToBorn = [];
@@ -99,7 +85,6 @@ function cellsMustDie(arrayOfDeath) {
     let x = arrayOfDeath[i][0];
     let y = arrayOfDeath[i][1];
     grid[x][y] = 0;
-    console.log(x + "-" + y + " muere");
   }
 }
 
@@ -108,6 +93,8 @@ function cellsMustBorn(arrayOfbirth) {
     let x = arrayOfbirth[i][0];
     let y = arrayOfbirth[i][1];
     grid[x][y] = 1;
-    console.log(x + "-" + y + " nace");
   }
 }
+
+whoIsLive(grid);
+console.log(grid);
