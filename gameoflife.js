@@ -27,7 +27,6 @@ export function gameOfLife(lifeArray) {
   let arrayCellsDead = [];
   const arrayDeath = [];
   let arrayBorn = [];
-  let death = false;
   for (let k = 0; k < lifeArray.length; k++) {
     let x = lifeArray[k][0];
     let y = lifeArray[k][1];
