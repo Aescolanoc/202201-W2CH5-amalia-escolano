@@ -22,7 +22,7 @@ export function whoIsLive(array) {
   return arrayLife;
 }
 
-function gameOfLife(lifeArray) {
+export function gameOfLife(lifeArray) {
   let cellsAliveAround = -1;
   let arrayCellsDead = [];
   const arrayDeath = [];
@@ -48,7 +48,7 @@ export function searchCellsAliveArround(ejeX, ejeY) {
   let friends = 0;
   for (let i = ejeX - 1; i <= ejeX + 1; i++) {
     for (let j = ejeY - 1; j <= ejeY + 1; j++) {
-      if ((i >= 0 && j >= 0) || (i < grid.legth && j < grid.length)) {
+      if (i >= 0 && i < grid.length && j >= 0 && j < grid.length) {
         if (grid[i][j] === 1) friends++;
       }
     }
@@ -61,7 +61,7 @@ export function newBorn(ejeX, ejeY) {
   let cellToBorn;
   for (let i = ejeX - 1; i <= ejeX + 1; i++) {
     for (let j = ejeY - 1; j <= ejeY + 1; j++) {
-      if ((i >= 0 && j >= 0) || (i < grid.legth && j < grid.legth)) {
+      if (i >= 0 && i < grid.length && j >= 0 && j < grid.length) {
         let x = i;
         let y = j;
         cellToBorn = saveNewBorn(x, y);
