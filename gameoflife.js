@@ -22,7 +22,7 @@ export function whoIsLive(array) {
   return arrayLife;
 }
 
-export function gameOfLife(lifeArray) {
+function gameOfLife(lifeArray) {
   let cellsAliveAround = -1;
   let arrayCellsDead = [];
   const arrayDeath = [];

@@ -1,9 +1,4 @@
-import {
-  whoIsLive,
-  gameOfLife,
-  searchCellsAliveArround,
-  newBorn,
-} from "./gameoflife.js";
+import { whoIsLive, searchCellsAliveArround, newBorn } from "./gameoflife.js";
 
 describe("testing searchCellsAliveArround", () => {
   test("If ejeX = 1, ejeY = 1, result should be 2", () => {
