@@ -27,9 +27,9 @@ function gameOfLife(lifeArray) {
   let arrayCellsDead = [];
   const arrayDeath = [];
   let arrayBorn = [];
-  for (let k = 0; k < lifeArray.length; k++) {
-    let x = lifeArray[k][0];
-    let y = lifeArray[k][1];
+  for (let element of lifeArray) {
+    let x = element[0];
+    let y = element[1];
     cellsAliveAround = searchCellsAliveArround(x, y) - 1;
     if (cellsAliveAround === 2 || cellsAliveAround === 3) {
       arrayBorn = newBorn(x, y);
@@ -57,21 +57,17 @@ export function searchCellsAliveArround(ejeX, ejeY) {
 }
 
 export function newBorn(ejeX, ejeY) {
-  let newBornFriends = 0;
-  let cellToBorn = [];
   let arrayCellsToBorn = [];
+  let cellToBorn;
   for (let i = ejeX - 1; i <= ejeX + 1; i++) {
     for (let j = ejeY - 1; j <= ejeY + 1; j++) {
       if ((i >= 0 && j >= 0) || (i < grid.legth && j < grid.legth)) {
-        if (grid[i][j] === 0) {
-          let x = i;
-          let y = j;
-          newBornFriends = searchCellsAliveArround(x, y);
-          if (newBornFriends === 3) {
-            cellToBorn.push(i, j);
-            arrayCellsToBorn.push(cellToBorn);
-            cellToBorn = [];
-          }
+        let x = i;
+        let y = j;
+        cellToBorn = saveNewBorn(x, y);
+        if (!cellToBorn === false) {
+          arrayCellsToBorn.push(cellToBorn);
+          cellToBorn = [];
         }
       }
     }
@@ -79,18 +75,32 @@ export function newBorn(ejeX, ejeY) {
   return arrayCellsToBorn;
 }
 
+function saveNewBorn(xLine, yLine) {
+  let newBornFriends = 0;
+  let cellToBorn = [];
+  if (grid[xLine][yLine] === 0) {
+    let a = xLine;
+    let b = yLine;
+    newBornFriends = searchCellsAliveArround(a, b);
+    if (newBornFriends === 3) {
+      cellToBorn.push(xLine, yLine);
+      return cellToBorn;
+    }
+  }
+}
+
 function cellsMustDie(arrayOfDeath) {
-  for (let i = 0; i < arrayOfDeath.length; i++) {
-    let x = arrayOfDeath[i][0];
-    let y = arrayOfDeath[i][1];
+  for (let element of arrayOfDeath) {
+    let x = element[0];
+    let y = element[1];
     grid[x][y] = 0;
   }
 }
 
 function cellsMustBorn(arrayOfbirth) {
-  for (let i = 0; i < arrayOfbirth.length; i++) {
-    let x = arrayOfbirth[i][0];
-    let y = arrayOfbirth[i][1];
+  for (let element of arrayOfbirth) {
+    let x = element[0];
+    let y = element[1];
     grid[x][y] = 1;
   }
 }
